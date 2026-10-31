@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.gestioncomptes.models.User;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText etEmail, etPassword;
@@ -26,7 +28,9 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         tvCreateAccount = findViewById(R.id.tvCreateAccount);
 
+        // Bouton de connexion
         btnLogin.setOnClickListener(v -> {
+
             String email = etEmail.getText().toString().trim();
             String password = etPassword.getText().toString();
 
@@ -37,16 +41,49 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            // Navigation vers l'accueil pour le moment
-            Intent intent = new Intent(
-                    LoginActivity.this, HomeActivity.class);
-            startActivity(intent);
-            finish();
+            boolean utilisateurTrouve = false;
+
+            // Parcourir la liste des utilisateurs
+            for (User user : UserManager.users) {
+
+                if (user.getEmail().equalsIgnoreCase(email)
+                        && user.getPassword().equals(password)) {
+
+                    utilisateurTrouve = true;
+                    break;
+                }
+            }
+
+            if (utilisateurTrouve) {
+
+                Toast.makeText(this,
+                        "Connexion réussie",
+                        Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(
+                        LoginActivity.this,
+                        HomeActivity.class
+                );
+
+                startActivity(intent);
+                finish();
+
+            } else {
+
+                Toast.makeText(this,
+                        "Email ou mot de passe incorrect",
+                        Toast.LENGTH_SHORT).show();
+            }
         });
 
+        // Navigation vers l'inscription
         tvCreateAccount.setOnClickListener(v -> {
+
             Intent intent = new Intent(
-                    LoginActivity.this, RegisterActivity.class);
+                    LoginActivity.this,
+                    RegisterActivity.class
+            );
+
             startActivity(intent);
         });
     }

@@ -1,3 +1,4 @@
+
 package com.example.gestioncomptes;
 
 import android.content.Intent;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.gestioncomptes.models.User;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -22,32 +25,39 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        // Initialisation des composants
         etNom = findViewById(R.id.etNom);
         etPrenom = findViewById(R.id.etPrenom);
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         etConfirmPassword = findViewById(R.id.etConfirmPassword);
+
         btnRegister = findViewById(R.id.btnRegister);
         tvLogin = findViewById(R.id.tvLogin);
 
+        // Bouton inscription
         btnRegister.setOnClickListener(v -> verifierInscription());
 
+        // Retour à la connexion
         tvLogin.setOnClickListener(v -> {
-            startActivity(
-                    new Intent(RegisterActivity.this, LoginActivity.class)
+            Intent intent = new Intent(
+                    RegisterActivity.this,
+                    LoginActivity.class
             );
+
+            startActivity(intent);
             finish();
         });
     }
 
     private void verifierInscription() {
 
+        // Récupération des données
         String nom = etNom.getText().toString().trim();
         String prenom = etPrenom.getText().toString().trim();
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString();
-        String confirmation =
-                etConfirmPassword.getText().toString();
+        String confirmation = etConfirmPassword.getText().toString();
 
         if (nom.isEmpty()) {
             etNom.setError("Le nom est obligatoire");
@@ -74,30 +84,23 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         if (confirmation.isEmpty()) {
-            etConfirmPassword.setError(
-                    "Confirmez votre mot de passe"
-            );
+            etConfirmPassword.setError("Confirmez votre mot de passe");
             etConfirmPassword.requestFocus();
             return;
         }
 
-        // 2. Vérifier le format de l'e-mail
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             etEmail.setError("Adresse e-mail invalide");
             etEmail.requestFocus();
             return;
         }
 
-        // 3. Vérifier la longueur du mot de passe
         if (password.length() < 8) {
-            etPassword.setError(
-                    "Minimum 8 caractères"
-            );
+            etPassword.setError("Minimum 8 caractères");
             etPassword.requestFocus();
             return;
         }
 
-        // 4. Vérifier la confirmation
         if (!password.equals(confirmation)) {
             etConfirmPassword.setError(
                     "Les mots de passe ne correspondent pas"
@@ -106,11 +109,33 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        // Toutes les vérifications sont réussies
+        if (UserManager.emailExiste(email)) {
+            etEmail.setError("Cet e-mail est déjà utilisé");
+            etEmail.requestFocus();
+            return;
+        }
+
+        User user = new User(
+                nom,
+                prenom,
+                email,
+                password
+        );
+
+        UserManager.ajouterUser(user);
+
         Toast.makeText(
                 this,
-                "Les données sont valides !",
+                "Inscription réussie !",
                 Toast.LENGTH_SHORT
         ).show();
+
+        Intent intent = new Intent(
+                RegisterActivity.this,
+                LoginActivity.class
+        );
+
+        startActivity(intent);
+        finish();
     }
 }
