@@ -15,7 +15,7 @@
         android:paddingTop="24dp"
         android:paddingBottom="24dp">
 
-        <!-- En-tête bleu : cohérent avec l'écran Login -->
+        <!-- En-tête -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="170dp"
@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Créer un compte"
+                android:text="@string/register_title"
                 android:textColor="#FFFFFF"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:text="Rejoignez GestionComptes en quelques étapes"
+                android:text="@string/register_hero_subtitle"
                 android:textColor="#EAF2FF"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -58,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:text="Bienvenue !"
+            android:text="@string/register_welcome"
             android:textColor="#172B4D"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -68,12 +68,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
             android:layout_marginBottom="20dp"
-            android:text="Renseignez vos informations pour créer votre espace personnel."
+            android:text="@string/register_description"
             android:textColor="#68778D"
             android:textSize="14sp"
             android:lineSpacingExtra="3dp" />
 
-        <!-- Formulaire d'inscription -->
+        <!-- Formulaire -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -82,12 +82,11 @@
             android:padding="20dp"
             android:elevation="3dp">
 
-
             <!-- Nom -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nom"
+                android:text="@string/last_name"
                 android:textColor="#26364D"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -98,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:background="@drawable/bg_register_input"
-                android:hint="Votre nom"
+                android:hint="@string/last_name_hint"
                 android:inputType="textPersonName|textCapWords"
                 android:imeOptions="actionNext"
                 android:singleLine="true"
@@ -112,7 +111,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Prénom"
+                android:text="@string/first_name"
                 android:textColor="#26364D"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -124,7 +123,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:background="@drawable/bg_register_input"
-                android:hint="Votre prénom"
+                android:hint="@string/first_name_hint"
                 android:inputType="textPersonName|textCapWords"
                 android:imeOptions="actionNext"
                 android:singleLine="true"
@@ -134,11 +133,11 @@
                 android:textColorHint="#91A0B5"
                 android:textSize="15sp" />
 
-
+            <!-- Email -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Adresse e-mail"
+                android:text="@string/email"
                 android:textColor="#26364D"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -150,7 +149,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:background="@drawable/bg_register_input"
-                android:hint="nom@exemple.com"
+                android:hint="@string/email_hint"
                 android:inputType="textEmailAddress"
                 android:imeOptions="actionNext"
                 android:singleLine="true"
@@ -161,10 +160,11 @@
                 android:textSize="15sp"
                 android:autofillHints="emailAddress" />
 
+            <!-- Mot de passe -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Mot de passe"
+                android:text="@string/password"
                 android:textColor="#26364D"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -176,7 +176,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:background="@drawable/bg_register_input"
-                android:hint="Créez un mot de passe"
+                android:hint="@string/create_password_hint"
                 android:inputType="textPassword"
                 android:imeOptions="actionNext"
                 android:singleLine="true"
@@ -187,10 +187,11 @@
                 android:textSize="15sp"
                 android:autofillHints="newPassword" />
 
+            <!-- Confirmation -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Confirmer le mot de passe"
+                android:text="@string/confirm_password"
                 android:textColor="#26364D"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -202,7 +203,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:background="@drawable/bg_register_input"
-                android:hint="Saisissez à nouveau le mot de passe"
+                android:hint="@string/confirm_password_hint"
                 android:inputType="textPassword"
                 android:imeOptions="actionDone"
                 android:singleLine="true"
@@ -213,6 +214,7 @@
                 android:textSize="15sp"
                 android:autofillHints="newPassword" />
 
+            <!-- Bouton inscription -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnRegister"
                 android:layout_width="match_parent"
@@ -222,12 +224,13 @@
                 android:backgroundTint="@null"
                 android:stateListAnimator="@null"
                 android:elevation="0dp"
-                android:text="Créer mon compte"
+                android:text="@string/register_button"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
+            <!-- Retour connexion -->
             <TextView
                 android:id="@+id/tvLogin"
                 android:layout_width="match_parent"
@@ -237,7 +240,7 @@
                 android:padding="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="Déjà inscrit(e) ? Se connecter"
+                android:text="@string/already_account"
                 android:textColor="#1565C0"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -249,7 +252,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="SIMPLE  •  SÉCURISÉ  •  PRATIQUE"
+            android:text="@string/login_footer"
             android:textColor="#8A98AB"
             android:textSize="11sp"
             android:letterSpacing="0.06" />

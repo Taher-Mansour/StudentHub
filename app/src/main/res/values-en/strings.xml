@@ -1,0 +1,83 @@
+
+<resources>
+
+    <string name="app_name">StudentHub</string>
+
+    <!-- Login -->
+    <string name="login_title">Login</string>
+    <string name="login_subtitle">Sign in to your personal space</string>
+    <string name="login_hero_subtitle">Manage your accounts easily</string>
+    <string name="login_welcome">Nice to see you again</string>
+    <string name="login_description">Sign in to access your personal space.</string>
+    <string name="login_button">Sign in</string>
+    <string name="no_account_create">Don\'t have an account? Create one</string>
+
+    <!-- Common fields -->
+    <string name="email">Email address</string>
+    <string name="email_hint">name@example.com</string>
+    <string name="password">Password</string>
+    <string name="password_hint">Enter your password</string>
+    <string name="confirm_password">Confirm password</string>
+
+    <!-- Registration -->
+    <string name="register_title">Create an account</string>
+    <string name="register_hero_subtitle">Join StudentHub in just a few steps</string>
+    <string name="register_welcome">Welcome!</string>
+    <string name="register_description">Enter your information to create your personal space.</string>
+    <string name="first_name">First name</string>
+    <string name="first_name_hint">Your first name</string>
+    <string name="last_name">Last name</string>
+    <string name="last_name_hint">Your last name</string>
+    <string name="create_password_hint">Create a password</string>
+    <string name="confirm_password_hint">Enter your password again</string>
+    <string name="register_button">Create my account</string>
+    <string name="already_account">Already registered? Sign in</string>
+
+    <!-- Home -->
+    <string name="welcome">Welcome</string>
+    <string name="my_subjects">My subjects</string>
+    <string name="my_tasks">My tasks</string>
+    <string name="upcoming_deadlines">Upcoming deadlines</string>
+    <string name="see_all">See all</string>
+    <string name="remaining_tasks">Remaining tasks</string>
+
+    <!-- Navigation -->
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="logout">Log out</string>
+
+
+    <!-- Home -->
+    <string name="student_space">Your student space</string>
+    <string name="greeting_label">HELLO</string>
+    <string name="welcome_message">Welcome to your space!</string>
+    <string name="study_progress_message">Organize your studies and track your progress.</string>
+    <string name="subjects">Subjects</string>
+
+    <!-- Subjects -->
+    <string name="advanced_java">Advanced Java</string>
+    <string name="oop_description">Object-oriented programming</string>
+    <string name="lab">Lab</string>
+    <string name="databases">Databases</string>
+    <string name="sql_administration">SQL and administration</string>
+    <string name="lecture">Lecture</string>
+
+    <!-- Tasks -->
+    <string name="finish_android_lab">Complete the Android lab</string>
+    <string name="mobile_development">Mobile development</string>
+    <string name="in_progress">In progress</string>
+    <string name="review_sql_queries">Review SQL queries</string>
+    <string name="to_do">To do</string>
+
+    <!-- Deadlines -->
+    <string name="june">JUNE</string>
+    <string name="android_project_submission">Android project submission</string>
+    <string name="database_exam">Database exam</string>
+
+    <!-- Navigation -->
+    <string name="tasks">Tasks</string>
+
+    <!-- Footer -->
+    <string name="login_footer">SIMPLE  •  SECURE  •  PRACTICAL</string>
+
+</resources>

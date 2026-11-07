@@ -15,19 +15,17 @@ public class RegisterActivity extends AppCompatActivity {
 
     private EditText etNom, etPrenom, etEmail;
     private EditText etPassword, etConfirmPassword;
+
     private Button btnRegister;
     private TextView tvLogin;
-
-    // Objet pour gérer la base de données SQLite
-    private DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // Initialisation de DatabaseHelper
-        databaseHelper = new DatabaseHelper(this);
+        // Initialisation de UserManager
+        UserManager.initialiser(this);
 
         // Initialisation des composants
         etNom = findViewById(R.id.etNom);
@@ -42,8 +40,9 @@ public class RegisterActivity extends AppCompatActivity {
         // Bouton inscription
         btnRegister.setOnClickListener(v -> verifierInscription());
 
-        // Retour à la connexion
+        // Retour vers connexion
         tvLogin.setOnClickListener(v -> {
+
             Intent intent = new Intent(
                     RegisterActivity.this,
                     LoginActivity.class
@@ -65,6 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Vérification du nom
         if (nom.isEmpty()) {
+
             etNom.setError("Le nom est obligatoire");
             etNom.requestFocus();
             return;
@@ -72,6 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Vérification du prénom
         if (prenom.isEmpty()) {
+
             etPrenom.setError("Le prénom est obligatoire");
             etPrenom.requestFocus();
             return;
@@ -79,6 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Vérification de l'email
         if (email.isEmpty()) {
+
             etEmail.setError("L'e-mail est obligatoire");
             etEmail.requestFocus();
             return;
@@ -86,6 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Vérification du mot de passe
         if (password.isEmpty()) {
+
             etPassword.setError("Le mot de passe est obligatoire");
             etPassword.requestFocus();
             return;
@@ -93,13 +96,18 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Vérification de la confirmation
         if (confirmation.isEmpty()) {
-            etConfirmPassword.setError("Confirmez votre mot de passe");
+
+            etConfirmPassword.setError(
+                    "Confirmez votre mot de passe"
+            );
+
             etConfirmPassword.requestFocus();
             return;
         }
 
         // Vérification du format de l'email
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+
             etEmail.setError("Adresse e-mail invalide");
             etEmail.requestFocus();
             return;
@@ -107,29 +115,33 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Vérification de la longueur du mot de passe
         if (password.length() < 8) {
+
             etPassword.setError("Minimum 8 caractères");
             etPassword.requestFocus();
             return;
         }
 
-        // Vérification de la confirmation du mot de passe
+        // Vérification de la confirmation
         if (!password.equals(confirmation)) {
+
             etConfirmPassword.setError(
                     "Les mots de passe ne correspondent pas"
             );
+
             etConfirmPassword.requestFocus();
             return;
         }
 
-        // Vérifier si l'email existe déjà dans SQLite
-        if (databaseHelper.emailExiste(email)) {
+        // Vérifier si l'email existe
+        if (UserManager.emailExiste(email)) {
+
             etEmail.setError("Cet e-mail est déjà utilisé");
             etEmail.requestFocus();
             return;
         }
 
-        // Insérer l'utilisateur dans SQLite
-        boolean resultat = databaseHelper.ajouterUtilisateur(
+        // Ajouter l'utilisateur avec UserManager
+        boolean resultat = UserManager.ajouterUser(
                 nom,
                 prenom,
                 email,
@@ -155,15 +167,6 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this,
                     "Erreur lors de l'inscription",
                     Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        if (databaseHelper != null) {
-            databaseHelper.close();
         }
     }
 }

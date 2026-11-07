@@ -1,11 +1,14 @@
+
 package com.example.gestioncomptes;
 
 import android.content.Context;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.content.ContentValues;
+
 import org.mindrot.jbcrypt.BCrypt;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "gestion_comptes.db";
@@ -30,13 +33,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onUpgrade(SQLiteDatabase db,
+                          int oldVersion, int newVersion) {
 
         db.execSQL("DROP TABLE IF EXISTS users");
-
         onCreate(db);
     }
 
+    // Ajouter un utilisateur
     public boolean ajouterUtilisateur(String nom, String prenom,
                                       String email, String password) {
 
@@ -59,6 +63,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return resultat != -1;
     }
 
+    // Vérifier si un email existe
     public boolean emailExiste(String email) {
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -80,6 +85,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return existe;
     }
 
+    // Vérifier la connexion
     public boolean verifierConnexion(String email, String password) {
 
         SQLiteDatabase db = this.getReadableDatabase();

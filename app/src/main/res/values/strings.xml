@@ -1,3 +1,84 @@
+
 <resources>
-    <string name="app_name">GestionComptes</string>
+
+    <string name="app_name">StudentHub</string>
+
+    <!-- Connexion -->
+    <string name="login_title">Connexion</string>
+    <string name="login_subtitle">Connectez-vous à votre espace personnel</string>
+    <string name="login_hero_subtitle">Gérez vos comptes en toute simplicité</string>
+    <string name="login_welcome">Content de vous revoir</string>
+    <string name="login_description">Connectez-vous pour accéder à votre espace personnel.</string>
+    <string name="login_button">Se connecter</string>
+    <string name="no_account_create">Pas encore de compte ? Créer un compte</string>
+
+    <!-- Champs communs -->
+    <string name="email">Adresse e-mail</string>
+    <string name="email_hint">nom@exemple.com</string>
+    <string name="password">Mot de passe</string>
+    <string name="password_hint">Saisissez votre mot de passe</string>
+    <string name="confirm_password">Confirmer le mot de passe</string>
+
+    <!-- Inscription -->
+    <string name="register_title">Créer un compte</string>
+    <string name="register_hero_subtitle">Rejoignez StudentHub en quelques étapes</string>
+    <string name="register_welcome">Bienvenue !</string>
+    <string name="register_description">Renseignez vos informations pour créer votre espace personnel.</string>
+    <string name="first_name">Prénom</string>
+    <string name="first_name_hint">Votre prénom</string>
+    <string name="last_name">Nom</string>
+    <string name="last_name_hint">Votre nom</string>
+    <string name="create_password_hint">Créez un mot de passe</string>
+    <string name="confirm_password_hint">Saisissez à nouveau le mot de passe</string>
+    <string name="register_button">Créer mon compte</string>
+    <string name="already_account">Déjà inscrit(e) ? Se connecter</string>
+
+    <!-- Accueil -->
+    <string name="welcome">Bienvenue</string>
+    <string name="my_subjects">Mes matières</string>
+    <string name="my_tasks">Mes tâches</string>
+    <string name="upcoming_deadlines">Prochaines échéances</string>
+    <string name="see_all">Voir tout</string>
+    <string name="remaining_tasks">Tâches restantes</string>
+
+    <!-- Navigation -->
+    <string name="home">Accueil</string>
+    <string name="profile">Profil</string>
+    <string name="logout">Déconnexion</string>
+
+
+    <!-- Accueil -->
+    <string name="student_space">Votre espace étudiant</string>
+    <string name="greeting_label">BONJOUR</string>
+    <string name="welcome_message">Bienvenue dans votre espace !</string>
+    <string name="study_progress_message">Organisez vos études et suivez votre progression.</string>
+    <string name="subjects">Matières</string>
+
+    <!-- Matières -->
+    <string name="advanced_java">Java avancé</string>
+    <string name="oop_description">Programmation orientée objet</string>
+    <string name="lab">TP</string>
+    <string name="databases">Bases de données</string>
+    <string name="sql_administration">SQL et administration</string>
+    <string name="lecture">Cours</string>
+
+    <!-- Tâches -->
+    <string name="finish_android_lab">Terminer le TP Android</string>
+    <string name="mobile_development">Développement mobile</string>
+    <string name="in_progress">En cours</string>
+    <string name="review_sql_queries">Réviser les requêtes SQL</string>
+    <string name="to_do">À faire</string>
+
+    <!-- Échéances -->
+    <string name="june">JUIN</string>
+    <string name="android_project_submission">Remise du projet Android</string>
+    <string name="database_exam">Examen bases de données</string>
+
+    <!-- Navigation -->
+    <string name="tasks">Tâches</string>
+
+
+    <!-- Pied de page -->
+    <string name="login_footer">SIMPLE  •  SÉCURISÉ  •  PRATIQUE</string>
+
 </resources>

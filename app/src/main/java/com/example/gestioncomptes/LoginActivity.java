@@ -16,16 +16,13 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private TextView tvCreateAccount;
 
-    // Gestion de la base de données
-    private DatabaseHelper databaseHelper;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Initialisation de DatabaseHelper
-        databaseHelper = new DatabaseHelper(this);
+        // Initialisation de UserManager
+        UserManager.initialiser(this);
 
         // Initialisation des composants
         etEmail = findViewById(R.id.etEmail);
@@ -33,11 +30,12 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         tvCreateAccount = findViewById(R.id.tvCreateAccount);
 
-        // Bouton de connexion
+        // Bouton connexion
         btnLogin.setOnClickListener(v -> verifierConnexion());
 
-        // Navigation vers l'inscription
+        // Navigation vers inscription
         tvCreateAccount.setOnClickListener(v -> {
+
             Intent intent = new Intent(
                     LoginActivity.this,
                     RegisterActivity.class
@@ -55,14 +53,17 @@ public class LoginActivity extends AppCompatActivity {
 
         // Vérification des champs
         if (email.isEmpty() || password.isEmpty()) {
+
             Toast.makeText(this,
                     "Veuillez remplir tous les champs",
                     Toast.LENGTH_SHORT).show();
+
             return;
         }
 
+        // Vérification avec UserManager
         boolean utilisateurTrouve =
-                databaseHelper.verifierConnexion(email, password);
+                UserManager.verifierConnexion(email, password);
 
         if (utilisateurTrouve) {
 
@@ -83,15 +84,6 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this,
                     "Email ou mot de passe incorrect",
                     Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        if (databaseHelper != null) {
-            databaseHelper.close();
         }
     }
 }

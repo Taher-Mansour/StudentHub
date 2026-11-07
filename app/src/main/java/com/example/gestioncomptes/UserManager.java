@@ -1,34 +1,53 @@
 
 package com.example.gestioncomptes;
 
-import com.example.gestioncomptes.models.User;
-import java.util.ArrayList;
+import android.content.Context;
 
 public class UserManager {
 
-    public static ArrayList<User> users = new ArrayList<>();
+    private static DatabaseHelper databaseHelper;
 
-    static {
-        users.add(new User(
-                "Mansour",
-                "Taher",
-                "taher@gmail.com",
-                "12345678"
-        ));
+    // Initialiser la base de données
+    public static void initialiser(Context context) {
+
+        if (databaseHelper == null) {
+            databaseHelper = new DatabaseHelper(
+                    context.getApplicationContext()
+            );
+        }
     }
 
+    // Vérifier si l'email existe
     public static boolean emailExiste(String email) {
 
-        for (User user : users) {
-            if (user.getEmail().equalsIgnoreCase(email)) {
-                return true;
-            }
-        }
-
-        return false;
+        return databaseHelper.emailExiste(email);
     }
 
-    public static void ajouterUser(User user) {
-        users.add(user);
+    // Ajouter un utilisateur
+    public static boolean ajouterUser(String nom, String prenom,
+                                      String email, String password) {
+
+        return databaseHelper.ajouterUtilisateur(
+                nom,
+                prenom,
+                email,
+                password
+        );
+    }
+
+    // Vérifier les informations de connexion
+    public static boolean verifierConnexion(String email,
+                                            String password) {
+
+        return databaseHelper.verifierConnexion(email, password);
+    }
+
+    // Fermer la base de données
+    public static void fermer() {
+
+        if (databaseHelper != null) {
+            databaseHelper.close();
+            databaseHelper = null;
+        }
     }
 }
