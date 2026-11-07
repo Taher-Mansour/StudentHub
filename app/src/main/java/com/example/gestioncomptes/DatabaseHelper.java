@@ -12,15 +12,17 @@ import org.mindrot.jbcrypt.BCrypt;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "gestion_comptes.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    // Création des tables
     @Override
     public void onCreate(SQLiteDatabase db) {
 
+        // Table des utilisateurs
         String CREATE_USERS_TABLE = "CREATE TABLE users (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "nom TEXT NOT NULL, " +
@@ -30,17 +32,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ")";
 
         db.execSQL(CREATE_USERS_TABLE);
+
+        // Table des matières
+        createSubjectsTable(db);
     }
 
+    // Création de la table subjects
+    private void createSubjectsTable(SQLiteDatabase db) {
+
+        String CREATE_SUBJECTS_TABLE = "CREATE TABLE IF NOT EXISTS subjects (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "name TEXT NOT NULL, " +
+                "code TEXT NOT NULL, " +
+                "teacher TEXT, " +
+                "description TEXT, " +
+                "user_id INTEGER NOT NULL" +
+                ")";
+
+        db.execSQL(CREATE_SUBJECTS_TABLE);
+    }
+
+    // Mise à jour de la base de données
     @Override
     public void onUpgrade(SQLiteDatabase db,
                           int oldVersion, int newVersion) {
 
-        db.execSQL("DROP TABLE IF EXISTS users");
-        onCreate(db);
+        if (oldVersion < 2) {
+            createSubjectsTable(db);
+        }
     }
 
-    // Ajouter un utilisateur
     public boolean ajouterUtilisateur(String nom, String prenom,
                                       String email, String password) {
 
