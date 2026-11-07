@@ -16,6 +16,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private TextView tvCreateAccount;
 
+    private DatabaseHelper databaseHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +25,9 @@ public class LoginActivity extends AppCompatActivity {
 
         // Initialisation de UserManager
         UserManager.initialiser(this);
+
+        // Initialisation de DatabaseHelper
+        databaseHelper = new DatabaseHelper(this);
 
         // Initialisation des composants
         etEmail = findViewById(R.id.etEmail);
@@ -35,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
 
         // Navigation vers inscription
         tvCreateAccount.setOnClickListener(v -> {
-
             Intent intent = new Intent(
                     LoginActivity.this,
                     RegisterActivity.class
@@ -47,7 +51,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void verifierConnexion() {
 
-        // Récupération des informations
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString();
 
@@ -67,14 +70,28 @@ public class LoginActivity extends AppCompatActivity {
 
         if (utilisateurTrouve) {
 
+            // Récupérer l'identifiant de l'utilisateur
+            int userId = databaseHelper.getUserId(email);
+
+            if (userId == -1) {
+                Toast.makeText(this,
+                        "Impossible de récupérer l'utilisateur",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             Toast.makeText(this,
                     "Connexion réussie",
                     Toast.LENGTH_SHORT).show();
 
+            // Ouvrir HomeActivity
             Intent intent = new Intent(
                     LoginActivity.this,
                     HomeActivity.class
             );
+
+            intent.putExtra("USER_ID", userId);
+            intent.putExtra("USER_EMAIL", email);
 
             startActivity(intent);
             finish();

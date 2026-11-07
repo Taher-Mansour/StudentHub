@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.gestioncomptes.models.Subject;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -133,5 +135,49 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
 
         return valide;
+    }
+
+    // Récupérer l'identifiant d'un utilisateur à partir de son email
+    public int getUserId(String email) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(
+                "users",
+                new String[]{"id"},
+                "email = ?",
+                new String[]{email},
+                null,
+                null,
+                null
+        );
+
+        int userId = -1;
+
+        if (cursor.moveToFirst()) {
+            userId = cursor.getInt(0);
+        }
+
+        cursor.close();
+
+        return userId;
+    }
+
+    // Ajouter une matière dans SQLite
+    public boolean ajouterMatiere(Subject subject) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put("name", subject.getName());
+        values.put("code", subject.getCode());
+        values.put("teacher", subject.getTeacher());
+        values.put("description", subject.getDescription());
+        values.put("user_id", subject.getUserId());
+
+        long resultat = db.insert("subjects", null, values);
+
+        return resultat != -1;
     }
 }
